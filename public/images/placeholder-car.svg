@@ -1,0 +1,7 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#f0f0f0" />
+  <text x="200" y="150" font-family="Arial" font-size="24" text-anchor="middle" fill="#808080">Car Image Placeholder</text>
+  <path d="M300,180 C300,160 280,150 260,150 L140,150 C120,150 100,160 100,180 L100,190 L120,190 L120,200 L100,200 L100,210 L300,210 L300,200 L280,200 L280,190 L300,190 Z" fill="#b0b0b0" />
+  <circle cx="130" cy="210" r="15" fill="#606060" />
+  <circle cx="270" cy="210" r="15" fill="#606060" />
+</svg> 

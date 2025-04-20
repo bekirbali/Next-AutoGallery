@@ -1,4 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AutoGallery - Car Showcase Website
+
+## Product Requirements Document (PRD)
+
+### Overview
+
+AutoGallery is a website for showcasing automobiles with an elegant, responsive UI and smooth animations powered by Framer Motion.
+
+### Core Pages
+
+1. **Home Page** - Landing page showcasing featured vehicles and brand introduction
+2. **Cars** - Grid layout of car cards with filtering options
+3. **Car Details** - Individual car information pages
+4. **Contact** - Contact form and dealership information
+5. **Admin Panel** - Secure dashboard for inventory management
+
+### Technical Requirements
+
+- Next.js for frontend
+- Framer Motion for animations and transitions
+- Responsive design with Tailwind CSS
+- Firebase for backend services
+- Authentication for admin access
+- SEO optimization
+
+### Key Features
+
+- Filterable car gallery
+- Animated page transitions
+- Interactive car detail views
+- Responsive across all devices
+- Contact form for inquiries
+- Admin dashboard for inventory management
+- CRUD operations for car listings
+- Image upload and storage
+- Secure authentication for admin users
+
+### Backend Services (Firebase)
+
+- Authentication for admin users
+- Firestore for car data storage
+- Storage for vehicle images
+- Hosting for deployment
+- Functions for backend processing (optional)
+
+### MVP Deliverables
+
+- Full site navigation
+- Car listing with search/filter
+- Individual car detail pages
+- Contact functionality
+- Basic animations and transitions
+- Admin panel with authentication
+- Complete CRUD operations for car inventory
 
 ## Getting Started
 
