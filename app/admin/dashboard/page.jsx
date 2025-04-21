@@ -1,11 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { auth } from "../../firebase/firebase";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
-export default function AdminDashboard() {
+export default function AdminDashboardPage() {
+  return (
+    <ProtectedRoute>
+      <AdminDashboard />
+    </ProtectedRoute>
+  );
+}
+
+function AdminDashboard() {
+  const router = useRouter();
+
   // In a real app, this would be fetched from Firebase
   const [inventory, setInventory] = useState([
     {
@@ -73,32 +87,14 @@ export default function AdminDashboard() {
     status: "Available",
   });
 
-  // Simulate checking for authentication on page load
-  useEffect(() => {
-    // In a real app, you would check for a valid Firebase auth session
-    const checkAuth = () => {
-      // Simulate an auth check - in a real app, check Firebase Auth state
-      const isAuthenticated = localStorage.getItem("adminAuthenticated");
-
-      if (!isAuthenticated) {
-        // If not authenticated, redirect to login
-        window.location.href = "/admin";
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  // Simulate login for demo purposes
-  useEffect(() => {
-    // This is just for demo - in a real app, this would be handled by Firebase Auth
-    localStorage.setItem("adminAuthenticated", "true");
-  }, []);
-
-  const handleLogout = () => {
-    // Clear local storage and redirect to login
-    localStorage.removeItem("adminAuthenticated");
-    window.location.href = "/admin";
+  // Handle logout
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push("/admin");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   const handleAddCar = (e) => {
@@ -193,23 +189,7 @@ export default function AdminDashboard() {
             {inventory.length}
           </p>
         </div>
-
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-medium mb-2">Categories</h3>
-          <p className="text-3xl font-bold text-[#3b82f6]">
-            {new Set(inventory.map((car) => car.category)).size}
-          </p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-          <h3 className="text-lg font-medium mb-2">Total Value</h3>
-          <p className="text-3xl font-bold text-[#3b82f6]">
-            $
-            {inventory
-              .reduce((sum, car) => sum + car.price, 0)
-              .toLocaleString()}
-          </p>
-        </div>
+        {/* Additional stat cards would go here in a real implementation */}
       </div>
 
       {/* Add Car Form - Modal */}
@@ -374,7 +354,7 @@ export default function AdminDashboard() {
               {inventory.map((car) => (
                 <tr
                   key={car.id}
-                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750"
+                  className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-150"
                 >
                   <td className="py-4 px-6">{car.id}</td>
                   <td className="py-4 px-6">
@@ -411,7 +391,7 @@ export default function AdminDashboard() {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => handleDeleteCar(car.id)}
-                        className="text-red-500 hover:text-red-700"
+                        className="text-red-500 hover:text-red-700 transition-colors duration-150"
                       >
                         Delete
                       </motion.button>

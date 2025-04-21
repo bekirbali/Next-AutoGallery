@@ -1,10 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { auth } from "../firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function AdminLoginPage() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -12,6 +18,13 @@ export default function AdminLoginPage() {
 
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (user && !loading) {
+      router.push("/admin/dashboard");
+    }
+  }, [user, loading, router]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,29 +39,45 @@ export default function AdminLoginPage() {
     setError("");
     setIsLoading(true);
 
-    // In a real app, you would authenticate with Firebase here
-    // For this demo, we'll just simulate authentication
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Authenticate with Firebase
+      await signInWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
 
-      // Demo credentials for simple validation
-      if (
-        credentials.email === "admin@autogallery.com" &&
-        credentials.password === "password123"
-      ) {
-        // Redirect to admin dashboard
-        window.location.href = "/admin/dashboard";
-      } else {
-        setError("Invalid email or password");
-      }
+      // The redirect will happen automatically due to the useEffect above
     } catch (err) {
-      setError("An error occurred during login. Please try again.");
       console.error("Login error:", err);
+
+      // Display appropriate error message based on Firebase error
+      if (
+        err.code === "auth/invalid-credential" ||
+        err.code === "auth/invalid-email" ||
+        err.code === "auth/invalid-password"
+      ) {
+        setError("Invalid email or password");
+      } else if (err.code === "auth/too-many-requests") {
+        setError("Too many failed login attempts. Please try again later.");
+      } else if (err.code === "auth/user-disabled") {
+        setError("This account has been disabled.");
+      } else {
+        setError("An error occurred during login. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
+  // If loading auth state, show minimal loading state
+  if (loading) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center px-6">
@@ -125,8 +154,6 @@ export default function AdminLoginPage() {
             Demo credentials:
             <br />
             Email: admin@autogallery.com
-            <br />
-            Password: password123
           </p>
         </div>
       </motion.div>
