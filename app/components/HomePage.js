@@ -3,11 +3,23 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { useState, useEffect } from "react";
 
 // Create a motion-enabled Link component
 const MotionLink = motion(Link);
 
 export default function HomePage() {
+  // State to track slider initialization
+  const [sliderInitialized, setSliderInitialized] = useState(false);
+
+  // Ensure slider loads only on client-side
+  useEffect(() => {
+    setSliderInitialized(true);
+  }, []);
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -25,8 +37,17 @@ export default function HomePage() {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.5,
-        delay: 0.1,
+        type: "spring",
+        stiffness: 120,
+        mass: 0.4,
+        damping: 8,
+        y: {
+          duration: 1,
+          ease: [0.215, 0.61, 0.355, 1], // custom cubic bezier for bounce
+          times: [0, 0.6, 1],
+          keyframes: [50, -10, 0],
+        },
+        opacity: { duration: 0.5 },
       },
     },
   };
@@ -37,8 +58,8 @@ export default function HomePage() {
     visible: (i) => ({
       opacity: 1,
       transition: {
-        duration: 1,
-        delay: 0.2 * i,
+        duration: 0.6,
+        delay: 0.1 * i,
       },
     }),
   };
@@ -66,7 +87,103 @@ export default function HomePage() {
       price: "$142,000",
       category: "Electric",
     },
+    {
+      id: 4,
+      name: "BMW M4 Competition",
+      image: "/images/bmw-m4.jpg",
+      price: "$84,000",
+      category: "Luxury",
+    },
+    {
+      id: 5,
+      name: "Mercedes-Benz EQS",
+      image: "/images/mercedes-eqs.jpg",
+      price: "$102,000",
+      category: "Electric",
+    },
+    {
+      id: 6,
+      name: "Audi RS e-tron GT",
+      image: "/images/audi-etron.jpg",
+      price: "$142,000",
+      category: "Electric",
+    },
+    {
+      id: 7,
+      name: "BMW M4 Competition",
+      image: "/images/bmw-m4.jpg",
+      price: "$84,000",
+      category: "Luxury",
+    },
+    {
+      id: 8,
+      name: "Mercedes-Benz EQS",
+      image: "/images/mercedes-eqs.jpg",
+      price: "$102,000",
+      category: "Electric",
+    },
+    {
+      id: 9,
+      name: "Audi RS e-tron GT",
+      image: "/images/audi-etron.jpg",
+      price: "$142,000",
+      category: "Electric",
+    },
+    {
+      id: 10,
+      name: "BMW M4 Competition",
+      image: "/images/bmw-m4.jpg",
+      price: "$84,000",
+      category: "Luxury",
+    },
+    {
+      id: 11,
+      name: "Mercedes-Benz EQS",
+      image: "/images/mercedes-eqs.jpg",
+      price: "$102,000",
+      category: "Electric",
+    },
+    {
+      id: 12,
+      name: "Audi RS e-tron GT",
+      image: "/images/audi-etron.jpg",
+      price: "$142,000",
+      category: "Electric",
+    },
   ];
+
+  // Slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -117,54 +234,56 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <motion.div variants={itemVariants} className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Featured Automobiles
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-[0.4rem]">
+                SON EKLENEN MODELLER
               </h2>
-              <p className="text-gray-800 dark:text-gray-200 max-w-2xl mx-auto">
-                Explore our selection of premium vehicles that combine
-                performance, luxury, and cutting-edge technology.
+              <p className="text-gray-800 dark:text-gray-200 max-w-2xl mx-auto tracking-[0.2rem]">
+                Son eklenen 12 yeni model.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredCars.map((car, i) => (
-                <motion.div
-                  key={car.id}
-                  custom={i}
-                  variants={cardVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg card-hover"
-                >
-                  <div className="relative h-64">
-                    <Image
-                      src={car.image}
-                      alt={car.name}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute top-4 right-4 bg-[#3b82f6] text-white py-1 px-3 rounded-full text-sm font-medium">
-                      {car.category}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 dark:text-white">
-                      {car.name}
-                    </h3>
-                    <p className="text-[#2563eb] dark:text-[#60a5fa] font-semibold text-lg mb-4">
-                      {car.price}
-                    </p>
-                    <Link
-                      href={`/cars/${car.id}`}
-                      className="inline-block font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline"
+            {sliderInitialized && (
+              <Slider {...sliderSettings} className="featured-cars-slider">
+                {featuredCars.map((car, i) => (
+                  <div key={car.id} className="px-2">
+                    <motion.div
+                      custom={i}
+                      variants={cardVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg h-full"
                     >
-                      View Details
-                    </Link>
+                      <div className="relative h-64 car-image-container">
+                        <Image
+                          src={car.image}
+                          alt={car.name}
+                          fill
+                          className="object-cover car-image"
+                        />
+                        <div className="absolute top-4 right-4 bg-[#3b82f6] text-white py-1 px-3 rounded-full text-sm font-medium">
+                          {car.category}
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold mb-2 dark:text-white">
+                          {car.name}
+                        </h3>
+                        <p className="text-[#2563eb] dark:text-[#60a5fa] font-semibold text-lg mb-4">
+                          {car.price}
+                        </p>
+                        <Link
+                          href={`/cars/${car.id}`}
+                          className="inline-block font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline"
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    </motion.div>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                ))}
+              </Slider>
+            )}
 
             <motion.div variants={itemVariants} className="text-center mt-12">
               <Link
@@ -190,13 +309,13 @@ export default function HomePage() {
           >
             <motion.div
               variants={itemVariants}
-              className="relative h-[400px] rounded-lg overflow-hidden"
+              className="relative h-[400px] rounded-lg overflow-hidden car-image-container"
             >
               <Image
                 src="/images/showroom.jpg"
                 alt="Car Showroom"
                 fill
-                className="object-cover"
+                className="object-cover car-image"
               />
             </motion.div>
 
