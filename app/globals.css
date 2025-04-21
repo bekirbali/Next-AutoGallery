@@ -108,3 +108,18 @@ body {
 .dark .featured-cars-slider .slick-dots li.slick-active button:before {
   color: #3b82f6;
 }
+
+/* WhatsApp Button Media Queries */
+@media (max-width: 768px) {
+  .whatsapp-button-container {
+    bottom: 1rem !important;
+    left: 1rem !important;
+  }
+}
+
+/* Reduce animation on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-button-animation {
+    animation: none !important;
+  }
+}

@@ -58,8 +58,8 @@ export default function HomePage() {
     visible: (i) => ({
       opacity: 1,
       transition: {
-        duration: 0.6,
-        delay: 0.1 * i,
+        duration: 0.5,
+        delay: (0.1 * i) / 2,
       },
     }),
   };
@@ -190,12 +190,12 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black opacity-70"></div>
+          <div className="absolute inset-0 bg-black opacity-90"></div>
           <Image
             src="/images/supercar.jpg"
             alt="Luxury car background"
             fill
-            className="object-cover"
+            className="object-cover brightness-75"
             priority
           />
         </div>
@@ -206,10 +206,10 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Discover Your Dream Car
             </h1>
-            <p className="text-xl text-white mb-8 max-w-2xl mx-auto drop-shadow-lg">
+            <p className="text-xl text-white mb-8 max-w-2xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Explore our curated collection of premium vehicles designed for
               performance and luxury.
             </p>
