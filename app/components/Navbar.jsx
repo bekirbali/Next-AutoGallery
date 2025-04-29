@@ -51,8 +51,9 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold">
-            <span className="text-[#3b82f6]">ÖZAK</span>Gallery
+          <Link href="/" className="text-2xl font-bold flex flex-col">
+            <span className="">ÖZAK</span>
+            <span className="text-[#3b82f6] text-sm mx-auto">otomotiv</span>
           </Link>
 
           <nav className="hidden md:flex space-x-8">
