@@ -207,11 +207,11 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              Discover Your Dream Car
+              Hayalindeki Arabayı Bul
             </h1>
             <p className="text-xl text-white mb-8 max-w-2xl mx-auto drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              Explore our curated collection of premium vehicles designed for
-              performance and luxury.
+              Performans ve lüks için tasarlanmış seçkin araç koleksiyonumuzu
+              keşfedin.
             </p>
             <MotionLink
               href="/cars"
@@ -219,7 +219,7 @@ export default function HomePage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Browse Cars
+              Araçlarımızı Keşfet
             </MotionLink>
           </motion.div>
         </div>
@@ -276,7 +276,7 @@ export default function HomePage() {
                           href={`/cars/${car.id}`}
                           className="inline-block font-medium text-[#2563eb] dark:text-[#60a5fa] hover:underline"
                         >
-                          View Details
+                          Detayları Gör
                         </Link>
                       </div>
                     </motion.div>
@@ -290,7 +290,7 @@ export default function HomePage() {
                 href="/cars"
                 className="inline-block border-2 border-[#3b82f6] text-[#3b82f6] dark:text-[#60a5fa] dark:border-[#60a5fa] py-2 px-6 rounded-lg font-medium hover:bg-[#3b82f6] hover:text-white dark:hover:bg-[#60a5fa] transition-colors"
               >
-                View All Cars
+                Tüm Araçları Keşfet
               </Link>
             </motion.div>
           </motion.div>
@@ -321,24 +321,24 @@ export default function HomePage() {
 
             <motion.div variants={itemVariants}>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                About AutoGallery
+                AutoGallery Hakkında
               </h2>
               <p className="text-gray-800 dark:text-gray-200 mb-6">
-                AutoGallery is your premier destination for discovering
-                exceptional automobiles. We curate a collection of the finest
-                vehicles, combining luxury, performance, and innovation.
+                AutoGallery, hayalindeki aracınızı keşfetmek için en önde gelen
+                adresinizdir. Lüks, performans ve yenilik ile birleşen en seçkin
+                araçlarımızı sunuyoruz.
               </p>
               <p className="text-gray-800 dark:text-gray-200 mb-8">
-                Our mission is to provide an immersive car browsing experience
-                that helps automotive enthusiasts find their perfect match. From
-                electric innovations to classic engineering marvels, we showcase
-                the best the industry has to offer.
+                Misyonumuz, otomotiv hayranlarının hayalindeki aracı bulmasına
+                yardımcı olmaktır. Elektrikli yeniliklerden klasik mühendislik
+                eserlerine kadar, endüstri tarafından sunulan en iyileri
+                göstermektir.
               </p>
               <Link
                 href="/contact"
                 className="inline-block bg-[#3b82f6] text-white py-2 px-6 rounded-lg font-medium hover:bg-blue-600 transition-colors shadow-md"
               >
-                Contact Us
+                Bizimle İletişime Geçin
               </Link>
             </motion.div>
           </motion.div>
