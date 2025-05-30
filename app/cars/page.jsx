@@ -153,10 +153,9 @@ export default function CarsPage() {
   return (
     <div className="container mx-auto px-6 py-12">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Explore Our Collection</h1>
+        <h1 className="text-4xl font-bold mb-4">Araçlarımızı Keşfet</h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Browse through our selection of premium vehicles and find your dream
-          car.
+          Premium araba koleksiyonumuzu keşfedip hayalinizdeki aracınızı bulun.
         </p>
       </div>
 
@@ -216,7 +215,7 @@ export default function CarsPage() {
             {/* Price Range Filter */}
             <div>
               <label className="block text-sm font-medium mb-2">
-                Price Range
+                Fiyat Aralığı
               </label>
               <select
                 value={filters.priceRange}
@@ -236,7 +235,7 @@ export default function CarsPage() {
             {/* Fuel Type Filter */}
             <div>
               <label className="block text-sm font-medium mb-2">
-                Fuel Type
+                Yakıt Tipi
               </label>
               <select
                 value={filters.fuelType}
@@ -253,7 +252,7 @@ export default function CarsPage() {
 
             {/* Year Filter */}
             <div>
-              <label className="block text-sm font-medium mb-2">Year</label>
+              <label className="block text-sm font-medium mb-2">Yıl</label>
               <select
                 value={filters.year}
                 onChange={(e) => handleFilterChange("year", e.target.value)}
@@ -313,7 +312,7 @@ export default function CarsPage() {
                   href={`/cars/${car.id}`}
                   className="block w-full text-center bg-[#3b82f6] text-white py-2 rounded-lg font-medium hover:bg-blue-600 transition-colors"
                 >
-                  View Details
+                  Detayları Gör
                 </Link>
               </div>
             </motion.div>
@@ -321,10 +320,10 @@ export default function CarsPage() {
         ) : (
           <div className="col-span-3 text-center py-12">
             <h3 className="text-xl font-semibold mb-2">
-              No cars match your filters
+              Bu kriterlere uygun araba bulunamadı
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Try adjusting your filter criteria to see more results.
+              Filtrelerinizi ayarlayarak daha fazla sonuç görüntüleyebilirsiniz.
             </p>
           </div>
         )}
